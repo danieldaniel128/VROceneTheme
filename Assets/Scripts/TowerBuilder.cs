@@ -11,31 +11,33 @@ public class TowerBuilder : MonoBehaviour
 
     private GameObject _hologramInstance; // Instance of the hologram
     private Tile _lastHoveredTile; // The last tile the ray hit
+    private Tile _currentHoveredTile;
 
-    
 
     bool isBuilding;
 
-    public InputActionProperty _buildingTowerAction;
+    public InputActionProperty _activateBuildingTowerModeAction;
+    public InputActionProperty _activateTowerBuiltAction;
 
     private void Start()
     {
-        _buildingTowerAction.action.started += OnBuildingTowerPerformed;
+        _activateBuildingTowerModeAction.action.performed += OnBuildingTowerPerformed;
+        _activateTowerBuiltAction.action.performed += OnBuildingTowerPerformed;
     }
 
     private void OnDestroy()
     {
-        _buildingTowerAction.action.started -= OnBuildingTowerPerformed;
+        _activateBuildingTowerModeAction.action.performed -= OnBuildingTowerPerformed;
+        _activateTowerBuiltAction.action.performed -= OnBuildingTowerPerformed;
     }
     private void OnApplicationQuit()
     {
-        _buildingTowerAction.action.started -= OnBuildingTowerPerformed;
+        _activateBuildingTowerModeAction.action.performed -= OnBuildingTowerPerformed;
+        _activateTowerBuiltAction.action.performed -= OnBuildingTowerPerformed;
     }
 
     private void OnBuildingTowerPerformed(InputAction.CallbackContext context)
     {
-        if (!context.performed)
-            return;
         isBuilding = !isBuilding;
         if (!isBuilding)
             HideHologram();
@@ -45,6 +47,12 @@ public class TowerBuilder : MonoBehaviour
             isBuilding = false;
         }
         Debug.Log("built a tower mode");
+    }
+    private void OnBuiltTowerPerformed(InputAction.CallbackContext context)
+    {
+        // Place the tower on the tile when the player clicks
+        if(isBuilding && _currentHoveredTile != null)
+            PlaceTower(_currentHoveredTile);
     }
     void Update()
     {
@@ -68,17 +76,14 @@ public class TowerBuilder : MonoBehaviour
                         UpdateHologram(hitTile);
                     }
                     HandleObjectRotation(_hologramInstance, 90);
-                    // Place the tower on the tile when the player clicks
-                    if (Input.GetMouseButtonDown(0)) // Left mouse button
-                    {
-                        PlaceTower(hitTile);
-                    }
+                    _currentHoveredTile = hitTile;
                 }
             }
             else
             {
                 // If the ray doesn't hit a tile, hide the hologram
                 HideHologram();
+                _currentHoveredTile = null;
             }
         }
     }

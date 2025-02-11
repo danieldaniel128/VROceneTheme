@@ -958,7 +958,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 364204652}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54de21c1dc466754e8c1e14154d1b856, type: 3}
   m_Name: 
@@ -1617,18 +1617,30 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _hologramMaterial: {fileID: 2100000, guid: 38f40dacd4ee86642b9e9e3cc43f1f90, type: 2}
-  _buildingTowerAction:
-    m_UseReference: 0
+  _activateBuildingTowerModeAction:
+    m_UseReference: 1
     m_Action:
-      m_Name: Building Tower
+      m_Name: Activate Building Tower Mode
       m_Type: 0
       m_ExpectedControlType: 
-      m_Id: cbfb4a17-6a0c-4510-9244-bb3709111fa9
+      m_Id: ad2f8bd1-7ec5-41a2-94dc-f82b8f46626d
       m_Processors: 
       m_Interactions: 
       m_SingletonActionBindings: []
       m_Flags: 0
-    m_Reference: {fileID: 0}
+    m_Reference: {fileID: 7904272356298805229, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  _activateTowerBuiltAction:
+    m_UseReference: 1
+    m_Action:
+      m_Name: Activate Tower Built
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: f21af8db-16ad-4df6-85a4-f7deb32c4def
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: -4289430672226363583, guid: c348712bda248c246b8c49b3db54643f, type: 3}
 --- !u!1 &500947302
 GameObject:
   m_ObjectHideFlags: 0
@@ -3456,14 +3468,14 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
-  m_Spacing: 0
-  m_ChildForceExpandWidth: 1
+  m_ChildAlignment: 4
+  m_Spacing: 5
+  m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 1
-  m_ChildScaleHeight: 1
+  m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
 --- !u!1 &1023097843
 GameObject:
