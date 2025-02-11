@@ -1617,6 +1617,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   _hologramMaterial: {fileID: 2100000, guid: 38f40dacd4ee86642b9e9e3cc43f1f90, type: 2}
+  _buildingTowerAction:
+    m_UseReference: 0
+    m_Action:
+      m_Name: Building Tower
+      m_Type: 0
+      m_ExpectedControlType: 
+      m_Id: cbfb4a17-6a0c-4510-9244-bb3709111fa9
+      m_Processors: 
+      m_Interactions: 
+      m_SingletonActionBindings: []
+      m_Flags: 0
+    m_Reference: {fileID: 0}
 --- !u!1 &500947302
 GameObject:
   m_ObjectHideFlags: 0

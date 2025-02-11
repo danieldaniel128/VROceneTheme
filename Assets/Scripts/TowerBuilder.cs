@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TowerBuilder : MonoBehaviour
 {
@@ -14,23 +15,43 @@ public class TowerBuilder : MonoBehaviour
     
 
     bool isBuilding;
+
+    public InputActionProperty _buildingTowerAction;
+
+    private void Start()
+    {
+        _buildingTowerAction.action.started += OnBuildingTowerPerformed;
+    }
+
+    private void OnDestroy()
+    {
+        _buildingTowerAction.action.started -= OnBuildingTowerPerformed;
+    }
+    private void OnApplicationQuit()
+    {
+        _buildingTowerAction.action.started -= OnBuildingTowerPerformed;
+    }
+
+    private void OnBuildingTowerPerformed(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return;
+        isBuilding = !isBuilding;
+        if (!isBuilding)
+            HideHologram();
+        else if (_selectedTower == null)//is building true, but didnt select a tower
+        {
+            //cant build if selected tower is null
+            isBuilding = false;
+        }
+        Debug.Log("built a tower mode");
+    }
     void Update()
     {
         HandleBuilding();
     }
     private void HandleBuilding()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            isBuilding = !isBuilding;
-            if (!isBuilding)
-                HideHologram();
-            else if(_selectedTower == null)//is building true, but didnt select a tower
-            {
-                //cant build if selected tower is null
-                isBuilding = false;
-            }
-        }
         if (isBuilding)
         {
             // Cast a ray from the camera to detect tiles
@@ -104,7 +125,7 @@ public class TowerBuilder : MonoBehaviour
         // Instantiate a real tower on the tile
         GameObject tower = Instantiate(_selectedTower, tile.transform.position + Vector3.up * 0.5f, _hologramInstance.transform.rotation,tile.transform);
         tile.IsOccupied = true;
-
+        Debug.Log("<color=orange>built a tower action performed!</color>");
         Debug.Log($"<color=orange>Tower placed on tile at position: {tile.transform.position}</color>");
     }
 

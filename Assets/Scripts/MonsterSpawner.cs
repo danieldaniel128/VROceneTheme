@@ -5,7 +5,7 @@ using UnityEngine;
 public class MonsterSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _monsterPrefab; // Prefab for the monster
-    [SerializeField] private float _spawnInterval = 2.0f; // Time between spawns
+    [SerializeField] private float _spawnInterval = 4.0f; // Time between spawns
     [SerializeField] private float _monsterSpeed = 2.0f; // Speed of the monster
     [SerializeField] private int _monstersAmount;
     [SerializeField] private int _monsterCounter = 0;//for read only
