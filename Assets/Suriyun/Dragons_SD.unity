@@ -2134,6 +2134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 618902373}
   - component: {fileID: 618902372}
+  - component: {fileID: 618902374}
   - component: {fileID: 618902375}
   m_Layer: 0
   m_Name: Directional Light
@@ -2222,6 +2223,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1919033428}
   m_LocalEulerAnglesHint: {x: 138.109, y: -47.697998, z: -17.141998}
+--- !u!95 &618902374
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618902371}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: efbceb58bfe09ac4580e68c85a59bdb6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &618902375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2328,14 +2351,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1919033428}
     m_Modifications:
-    - target: {fileID: 1121175242684650998, guid: d7d32651c27775643af6db1983d4c955, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1330770858241664115, guid: d7d32651c27775643af6db1983d4c955, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2569389807691483171, guid: d7d32651c27775643af6db1983d4c955, type: 3}
       propertyPath: m_LocalPosition.x
       value: -50.200317

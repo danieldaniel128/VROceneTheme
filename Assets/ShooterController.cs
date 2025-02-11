@@ -4,6 +4,7 @@ public class ShooterController : MonoBehaviour
 {
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private Transform _spawnBulletsPoint;
+    [SerializeField] private Transform _rotationPoint;
     [SerializeField] private float _bulletSpeed;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public InputActionProperty _shootingAction;
@@ -24,8 +25,8 @@ public class ShooterController : MonoBehaviour
 
     private void OnShotPerformed(InputAction.CallbackContext context)
     {
-        GameObject bullet = Instantiate(_bulletPrefab, _spawnBulletsPoint.position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody>().AddForce(_spawnBulletsPoint.right* _bulletSpeed,ForceMode.Impulse);
+        GameObject bullet = Instantiate(_bulletPrefab, _spawnBulletsPoint.position, _rotationPoint.rotation);
+        bullet.GetComponent<Rigidbody>().AddForce(_spawnBulletsPoint.forward* _bulletSpeed,ForceMode.Impulse);
         Destroy(bullet, 5);
         Debug.Log("Shot action performed!");
     }
