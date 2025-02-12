@@ -9,7 +9,7 @@ public class TowerBuilder : MonoBehaviour
     [SerializeField] private LayerMask _tileLayerMask; // Layer mask to ensure the ray hits tiles only
     [SerializeField] private Material _hologramMaterial; // Material for the hologram effect
 
-    private GameObject _hologramInstance; // Instance of the hologram
+    [SerializeField] private GameObject _hologramInstance; // Instance of the hologram
     private Tile _lastHoveredTile; // The last tile the ray hit
     private Tile _currentHoveredTile;
 
@@ -21,19 +21,21 @@ public class TowerBuilder : MonoBehaviour
 
     private void Start()
     {
-        _activateBuildingTowerModeAction.action.performed += OnBuildingTowerPerformed;
-        _activateTowerBuiltAction.action.performed += OnBuildingTowerPerformed;
+        _activateBuildingTowerModeAction.action.started += OnBuildingTowerPerformed;
+        _activateTowerBuiltAction.action.started += OnBuiltTowerPerformed;
+        if(_selectedTower != null)//in case there is a default.
+            SetSelectTower(_selectedTower);
     }
 
     private void OnDestroy()
     {
-        _activateBuildingTowerModeAction.action.performed -= OnBuildingTowerPerformed;
-        _activateTowerBuiltAction.action.performed -= OnBuildingTowerPerformed;
+        _activateBuildingTowerModeAction.action.started -= OnBuildingTowerPerformed;
+        _activateTowerBuiltAction.action.started -= OnBuiltTowerPerformed;
     }
     private void OnApplicationQuit()
     {
-        _activateBuildingTowerModeAction.action.performed -= OnBuildingTowerPerformed;
-        _activateTowerBuiltAction.action.performed -= OnBuildingTowerPerformed;
+        _activateBuildingTowerModeAction.action.started -= OnBuildingTowerPerformed;
+        _activateTowerBuiltAction.action.started -= OnBuiltTowerPerformed;
     }
 
     private void OnBuildingTowerPerformed(InputAction.CallbackContext context)
@@ -109,8 +111,6 @@ public class TowerBuilder : MonoBehaviour
     private void UpdateHologram(Tile tile)
     {
         _lastHoveredTile = tile;
-
-
         // Position the hologram at the center of the tile
         _hologramInstance.transform.position = tile.transform.position + Vector3.up * 0.5f; // Adjust height as needed
         _hologramInstance.SetActive(true);
