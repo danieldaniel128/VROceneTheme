@@ -157,6 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4143387134651426886}
   - component: {fileID: 2782047511076538343}
+  - component: {fileID: 753370879120414902}
   m_Layer: 0
   m_Name: HItUITrigger
   m_TagString: Untagged
@@ -204,3 +205,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 0.91563594}
   m_Center: {x: 0.000000056574073, y: -0.000000036652857, z: -0.30781698}
+--- !u!114 &753370879120414902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5666644798437169268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0613c91b80fb95145a61abdb7d293cd9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _handUIBTN: {fileID: 7140116645400235645}
+  _handMask:
+    serializedVersion: 2
+    m_Bits: 128

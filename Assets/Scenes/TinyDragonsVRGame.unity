@@ -455,10 +455,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSelectionPanel (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 5113528071759637240, guid: 9d0e9f43dc035394a97768a97464dd4d, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6005091613601948642, guid: 9d0e9f43dc035394a97768a97464dd4d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -543,6 +539,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1665735484}
+    - target: {fileID: 7140116645400235645, guid: 9d0e9f43dc035394a97768a97464dd4d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectTower
+      objectReference: {fileID: 0}
     - target: {fileID: 7140116645400235645, guid: 9d0e9f43dc035394a97768a97464dd4d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 2
@@ -1648,10 +1648,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: TowerSelectionPanel (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 5113528071759637240, guid: 9d0e9f43dc035394a97768a97464dd4d, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6005091613601948642, guid: 9d0e9f43dc035394a97768a97464dd4d, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1736,6 +1732,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1665735484}
+    - target: {fileID: 7140116645400235645, guid: 9d0e9f43dc035394a97768a97464dd4d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectTower
+      objectReference: {fileID: 0}
     - target: {fileID: 7140116645400235645, guid: 9d0e9f43dc035394a97768a97464dd4d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 1
@@ -5993,7 +5993,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1665735479}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
   m_Name: 
