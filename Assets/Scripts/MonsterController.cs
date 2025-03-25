@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MonsterController : MonoBehaviour
 {
+    [SerializeField] Health _health;
     private Queue<Vector3> _waypoints; // The path in world positions
     private float _speed;
     StateMachine _monsterStateMachine;
@@ -26,6 +27,12 @@ public class MonsterController : MonoBehaviour
     private void Update()
     {
         _monsterStateMachine.Update();
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag.Equals("Arrow"))
+            _health.TakeDamage(1,gameObject);
+
     }
 
 }

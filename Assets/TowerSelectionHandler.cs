@@ -7,8 +7,8 @@ public class TowerSelectionHandler : MonoBehaviour
 {
     [SerializeField] GameObject _selectionPanel;
     //tmp for testing
-    [SerializeField] GameObject[] _towerprefabs;
-    public Action<GameObject> OnTowerSelectionSucceed;
+    [SerializeField] TowerController[] _towerprefabs;
+    public Action<TowerController> OnTowerSelectionSucceed;
 
     //private void OnActivatedSelectionPanelPerformed(InputAction.CallbackContext context)
     //{

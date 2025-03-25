@@ -57,15 +57,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5921e45280d702e44ad0fb582ac16d26, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.06
+      value: 6.8716183
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5921e45280d702e44ad0fb582ac16d26, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0.609024
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5921e45280d702e44ad0fb582ac16d26, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -19.98
+      value: 14.41741
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 5921e45280d702e44ad0fb582ac16d26, type: 3}
       propertyPath: m_LocalRotation.w
@@ -121,14 +121,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 7016677610368337568, guid: 6a2a8a03b2fb7904986a928cb5a1d76b, type: 3}
-  _projMaxHeight: 2
+  _projMaxHeight: 1
   _attackTimer: 0
-  _attackCooldown: 3
+  _attackCooldown: 1
   _scanTimer: 0
   _scanCooldown: 0.5
   _spawnPoint: {fileID: 8443427983961836503}
   targetLayer:
     serializedVersion: 2
-    m_Bits: 16
+    m_Bits: 256
+  IsPlaced: 0
   radius: 4
-  durationHit: 2.5
+  durationHit: 0.3

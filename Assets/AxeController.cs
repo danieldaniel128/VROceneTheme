@@ -12,13 +12,9 @@ public class AxeController : MonoBehaviour
         if (health != null)
         {
             Debug.Log("hit tree");
-            health.TakeDamage(damage);
             Instantiate(_hitVfx, hitPoint.position, hitPoint.rotation,hitPoint);
-            if (health.CurrentHealth <= 0)
-            {
-                GameManager.Instance.TowerBuilder.AddWood(health.DeathWoodDropAmount);
-                Destroy(other.attachedRigidbody.gameObject);
-            }
+            health.TakeDamage(damage, other.attachedRigidbody.gameObject);
+            
         }
     }
 }

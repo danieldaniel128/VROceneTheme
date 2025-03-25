@@ -1,10 +1,11 @@
 using UnityEngine;
 
-public class Health : MonoBehaviour,ITakeDamage
+public class Health : MonoBehaviour
 {
     [SerializeField] private float _maxHealth;
     public float MaxHealth { get => _maxHealth; set { _maxHealth = value; } }
-    public float CurrentHealth { get ; set ; }
+    [SerializeField] float _hp;
+    public float CurrentHealth { get => _hp; set { _hp = value; } }
     public int DeathWoodDropAmount;
     private void Start()
     {
@@ -14,11 +15,20 @@ public class Health : MonoBehaviour,ITakeDamage
     {
         CurrentHealth = MaxHealth;
     }
-
-    public void TakeDamage(float damageTaken)
+    [ContextMenu("take damage")]
+    public void TakeDamage(float damageTaken,GameObject deathObject)
     {
         CurrentHealth -= damageTaken;
-        if (CurrentHealth < 0)
+        if (CurrentHealth <= 0)
+        {
             CurrentHealth = 0;
+            GiveDrop();
+            Destroy(deathObject);
+        }
+    }
+    [ContextMenu("drop")]
+    public void GiveDrop()
+    {
+        GameManager.Instance.TowerBuilder.AddWood(DeathWoodDropAmount);
     }
 }

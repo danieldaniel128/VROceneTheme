@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,17 +6,18 @@ public class TowerBuilder : MonoBehaviour
 {
     [Header("Builder References")]
     [SerializeField] private Camera _playerCamera; // Reference to the player's camera
-    [SerializeField] private GameObject _selectedTower; // Default tower prefab
+    [SerializeField] private TowerController _selectedTower; // Default tower prefab
     [SerializeField] private Material _hologramMaterial; // Material for the hologram effect
     [SerializeField] private Transform _buildingRayStartPos;
-    [SerializeField] private GameObject _hologramInstance; // Instance of the hologram
+    [SerializeField] private TowerController _hologramInstance; // Instance of the hologram
     [SerializeField] private LayerMask _tileLayerMask; // Layer mask to ensure the ray hits tiles only
+    [SerializeField] private TMPro.TMP_Text _currentUIAmountText;
     [Header("Builder Settings")]
     [SerializeField] private int _requiredWoodAmount;
     private Tile _lastHoveredTile; // The last tile the ray hit
     private Tile _currentHoveredTile;
-
-    public int CurrentWoodAmount {  get; private set; }
+    int currentWoodAmount;
+    public int CurrentWoodAmount {  get => currentWoodAmount; private set { currentWoodAmount = value; _currentUIAmountText.text = $"{currentWoodAmount}x"; } }
     bool isBuilding;
 
     public InputActionProperty _activateBuildingTowerModeAction;
@@ -30,6 +32,7 @@ public class TowerBuilder : MonoBehaviour
         _activateTowerBuiltAction.action.started += OnBuiltTowerPerformed;
         if(_selectedTower != null)//in case there is a default.
             SetSelectTower(_selectedTower);
+        HideHologram();
     }
 
     private void OnDestroy()
@@ -98,7 +101,7 @@ public class TowerBuilder : MonoBehaviour
             }
         }
     }
-    private void HandleObjectRotation(GameObject rotatedObject, float angle)
+    private void HandleObjectRotation(TowerController rotatedObject, float angle)
     {
         // Rotate -90 degrees when pressing Q
         if (Input.GetKeyDown(KeyCode.Q))
@@ -112,7 +115,7 @@ public class TowerBuilder : MonoBehaviour
         }
     }
 
-    private void RotateObjectByDegrees(GameObject rotatedObject, float angle)
+    private void RotateObjectByDegrees(TowerController rotatedObject, float angle)
     {
         rotatedObject.transform.Rotate(0, 0, angle);
         //Debug.Log($"<color=lightblue>{rotatedObject.name} rotated by {angle} degrees.</color>");
@@ -122,14 +125,14 @@ public class TowerBuilder : MonoBehaviour
         _lastHoveredTile = tile;
         // Position the hologram at the center of the tile
         _hologramInstance.transform.position = tile.transform.position + Vector3.up * 0.5f; // Adjust height as needed
-        _hologramInstance.SetActive(true);
+        _hologramInstance.gameObject.SetActive(true);
     }
 
     private void HideHologram()
     {
         if (_hologramInstance != null)
         {
-            _hologramInstance.SetActive(false);
+            _hologramInstance.gameObject. SetActive(false);
         }
         _lastHoveredTile = null;
     }
@@ -137,7 +140,8 @@ public class TowerBuilder : MonoBehaviour
     private void PlaceTower(Tile tile)
     {
         // Instantiate a real tower on the tile
-        GameObject tower = Instantiate(_selectedTower, tile.transform.position + Vector3.up * 0.5f, _hologramInstance.transform.rotation,tile.transform);
+        TowerController tower = Instantiate(_selectedTower, tile.transform.position + Vector3.up * 0.5f, _hologramInstance.transform.rotation,tile.transform);
+        tower.IsPlaced = true;
         tile.IsOccupied = true;
         CurrentWoodAmount -= _requiredWoodAmount;
         if (CurrentWoodAmount < _requiredWoodAmount)
@@ -150,15 +154,15 @@ public class TowerBuilder : MonoBehaviour
         //Debug.Log($"<color=orange>Tower placed on tile at position: {tile.transform.position}</color>");
     }
 
-    private void SetHologramMaterial(GameObject hologram)
+    private void SetHologramMaterial(TowerController hologram)
     {
-        Renderer[] renderers = hologram.GetComponentsInChildren<Renderer>();
+        Renderer[] renderers = hologram.gameObject.GetComponentsInChildren<Renderer>();
         foreach (Renderer renderer in renderers)
         {
             renderer.material = _hologramMaterial;
         }
     }
-    public void SetSelectTower(GameObject selectedTower)
+    public void SetSelectTower(TowerController selectedTower)
     {
         _selectedTower = selectedTower;
         if (_hologramInstance != null)//tmp

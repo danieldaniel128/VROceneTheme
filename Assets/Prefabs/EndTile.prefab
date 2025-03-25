@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3270515173252675718}
   - component: {fileID: 2559412524391108328}
   - component: {fileID: 6553500400877122100}
+  - component: {fileID: -4766160564589599992}
   m_Layer: 0
   m_Name: EndTile
   m_TagString: Untagged
@@ -103,12 +104,26 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-4766160564589599992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4565376276719632843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e30aa7aaa0406b04cb42ee1c8243f23d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 10
+  DeathWoodDropAmount: 0
 --- !u!1001 &1743311806338246556
 PrefabInstance:
   m_ObjectHideFlags: 0
