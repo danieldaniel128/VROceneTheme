@@ -7,8 +7,8 @@ public class TileDataSO : ScriptableObject
     //public float PrefabOffset;
     //public float PrefabRotation;//0 - 360
     public GameObject tilePrefab;
-    public void GeneratePrefab(Vector3 position, Transform parent)
+    public Transform GeneratePrefab(Vector3 position, Transform parent)
     {
-        Instantiate(tilePrefab, position, Quaternion.identity,parent);
+        return Instantiate(tilePrefab, position, Quaternion.identity,parent).transform;
     }
 }

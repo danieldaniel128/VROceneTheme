@@ -59,5 +59,36 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: c73c37430c8ac1e43831ddacfa77c180, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5167295120164061111}
   m_SourcePrefab: {fileID: 100100000, guid: c73c37430c8ac1e43831ddacfa77c180, type: 3}
+--- !u!1 &3167568572743286025 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: c73c37430c8ac1e43831ddacfa77c180, type: 3}
+  m_PrefabInstance: {fileID: 3167568572743187369}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5167295120164061111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3167568572743286025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f46681ba3249124995a04e453ce1e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 7016677610368337568, guid: 6a2a8a03b2fb7904986a928cb5a1d76b, type: 3}
+  _projMaxHeight: 2
+  _attackTimer: 0
+  _attackCooldown: 3
+  _scanTimer: 0
+  _scanCooldown: 0.5
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 16
+  radius: 4
+  durationHit: 2.5

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.Rendering.VolumeComponent;
 
 public class GridManager : MonoBehaviour
@@ -18,6 +19,8 @@ public class GridManager : MonoBehaviour
     [SerializeField] Transform _initPosition;
     [SerializeField] float _tileOffset;
     [SerializeField] List<TileDataSO> _tileDataSOs;
+    [Header("Environment Props References")]
+    [SerializeField] List<GameObject> _EnvironmentPropsPrefabs;
     public List<Vector2Int> MonsterPath { get; private set; }
 
     public Action OnMonsterPathGeneratedComplete;
@@ -72,14 +75,19 @@ public class GridManager : MonoBehaviour
                     generatedTileData = UnityEngine.Random.value < 0.7f
                         ? _tileDataSOs.FirstOrDefault(c => c.TileType.Equals(TileTypeDictionary.Tower_Tile))
                         : _tileDataSOs.FirstOrDefault(c => c.TileType.Equals(TileTypeDictionary.Environment_Tile));
-                    if(generatedTileData.TileType.Equals(TileTypeDictionary.Environment_Tile))
-                        newTile.IsOccupied = true;
                 }
 
                 newTile.InitTile(generatedTileData, currentIndex);
                 _tiles.Add(currentIndex, newTile);
 
-                newTile.ContainedData.GeneratePrefab(newTileWorldPosition, newTile.transform);
+                Transform generatedTileTransform = newTile.ContainedData.GeneratePrefab(newTileWorldPosition, newTile.transform);
+                if (generatedTileData.TileType.Equals(TileTypeDictionary.Environment_Tile))
+                {
+                    //generatedTileData.GeneratePrefab(newTileWorldPosition, newTile.transform);
+                    GameObject environmentProp = Instantiate(_EnvironmentPropsPrefabs[UnityEngine.Random.Range(0, _EnvironmentPropsPrefabs.Count)], newTileWorldPosition, Quaternion.identity);
+                    environmentProp.transform.SetParent(generatedTileTransform);
+                    newTile.IsOccupied = true;
+                }
             }
         }
 
