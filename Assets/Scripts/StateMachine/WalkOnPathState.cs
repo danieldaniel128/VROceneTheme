@@ -16,7 +16,7 @@ public class WalkOnPathState : State
     }
     public override void EnterState()
     {
-        Debug.Log("<color=green>entering WalkOnPathState state</color>");
+        //Debug.Log("<color=green>entering WalkOnPathState state</color>");
         _targetPosition = _waypoints.Dequeue();
     }
 

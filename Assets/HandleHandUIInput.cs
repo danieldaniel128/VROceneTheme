@@ -10,7 +10,7 @@ public class HandleHandUIInput : MonoBehaviour
     {
         _handUIBTN.targetGraphic.color = _handUIBTN.colors.pressedColor;
         _handUIBTN.onClick?.Invoke();
-        Debug.Log("clicked pressed");
+        //Debug.Log("clicked pressed");
     }
     private void OnTriggerExit(Collider other)
     {

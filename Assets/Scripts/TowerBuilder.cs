@@ -3,22 +3,27 @@ using UnityEngine.InputSystem;
 
 public class TowerBuilder : MonoBehaviour
 {
-    [Header("Builder Settings")]
+    [Header("Builder References")]
     [SerializeField] private Camera _playerCamera; // Reference to the player's camera
     [SerializeField] private GameObject _selectedTower; // Default tower prefab
-    [SerializeField] private LayerMask _tileLayerMask; // Layer mask to ensure the ray hits tiles only
     [SerializeField] private Material _hologramMaterial; // Material for the hologram effect
-
+    [SerializeField] private Transform _buildingRayStartPos;
     [SerializeField] private GameObject _hologramInstance; // Instance of the hologram
+    [SerializeField] private LayerMask _tileLayerMask; // Layer mask to ensure the ray hits tiles only
+    [Header("Builder Settings")]
+    [SerializeField] private int _requiredWoodAmount;
     private Tile _lastHoveredTile; // The last tile the ray hit
     private Tile _currentHoveredTile;
 
-
+    public int CurrentWoodAmount {  get; private set; }
     bool isBuilding;
 
     public InputActionProperty _activateBuildingTowerModeAction;
     public InputActionProperty _activateTowerBuiltAction;
-
+    public void AddWood(int woodAmount)
+    {
+        CurrentWoodAmount += woodAmount;
+    }
     private void Start()
     {
         _activateBuildingTowerModeAction.action.started += OnBuildingTowerPerformed;
@@ -41,6 +46,10 @@ public class TowerBuilder : MonoBehaviour
     private void OnBuildingTowerPerformed(InputAction.CallbackContext context)
     {
         isBuilding = !isBuilding;
+        if (CurrentWoodAmount < _requiredWoodAmount)
+        {
+            isBuilding = false;
+        }
         if (!isBuilding)
             HideHologram();
         else if (_selectedTower == null)//is building true, but didnt select a tower
@@ -48,7 +57,7 @@ public class TowerBuilder : MonoBehaviour
             //cant build if selected tower is null
             isBuilding = false;
         }
-        Debug.Log("built a tower mode");
+        //Debug.Log("built a tower mode");
     }
     private void OnBuiltTowerPerformed(InputAction.CallbackContext context)
     {
@@ -65,7 +74,7 @@ public class TowerBuilder : MonoBehaviour
         if (isBuilding)
         {
             // Cast a ray from the camera to detect tiles
-            Ray ray = new Ray(_playerCamera.transform.position, _playerCamera.transform.forward);
+            Ray ray = new Ray(_buildingRayStartPos.position, _buildingRayStartPos.forward);
             if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, _tileLayerMask))
             {
                 Tile hitTile = hit.collider.transform.parent.GetComponent<Tile>();
@@ -106,7 +115,7 @@ public class TowerBuilder : MonoBehaviour
     private void RotateObjectByDegrees(GameObject rotatedObject, float angle)
     {
         rotatedObject.transform.Rotate(0, 0, angle);
-        Debug.Log($"<color=lightblue>{rotatedObject.name} rotated by {angle} degrees.</color>");
+        //Debug.Log($"<color=lightblue>{rotatedObject.name} rotated by {angle} degrees.</color>");
     }
     private void UpdateHologram(Tile tile)
     {
@@ -130,8 +139,15 @@ public class TowerBuilder : MonoBehaviour
         // Instantiate a real tower on the tile
         GameObject tower = Instantiate(_selectedTower, tile.transform.position + Vector3.up * 0.5f, _hologramInstance.transform.rotation,tile.transform);
         tile.IsOccupied = true;
-        Debug.Log("<color=orange>built a tower action performed!</color>");
-        Debug.Log($"<color=orange>Tower placed on tile at position: {tile.transform.position}</color>");
+        CurrentWoodAmount -= _requiredWoodAmount;
+        if (CurrentWoodAmount < _requiredWoodAmount)
+        {
+            isBuilding = false;
+        }
+        if (!isBuilding)
+            HideHologram();
+        //Debug.Log("<color=orange>built a tower action performed!</color>");
+        //Debug.Log($"<color=orange>Tower placed on tile at position: {tile.transform.position}</color>");
     }
 
     private void SetHologramMaterial(GameObject hologram)

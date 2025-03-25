@@ -8,8 +8,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GridManager _gridManager;
     [SerializeField] private TowerSelectionHandler _towerSelectionHandler;
     [SerializeField] private TowerBuilder _towerBuilder;
+    public TowerBuilder TowerBuilder { get => _towerBuilder;}
+
+    public static GameManager Instance;
     private void Awake()
     {
+        Instance = this;
         // Generate the monster path
         _gridManager.OnMonsterPathGeneratedComplete += InitMonsterSpawenr;
         _towerSelectionHandler.OnTowerSelectionSucceed += _towerBuilder.SetSelectTower;
@@ -27,4 +31,5 @@ public class GameManager : MonoBehaviour
     {
         _monsterSpawner.Init(_gridManager.MonsterPath, _gridManager.GetTileIndexWorldPosition);
     }
+    
 }
